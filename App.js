@@ -5,6 +5,8 @@ import Card from "./components/Card";
 import { Icon } from "expo";
 import { NotificationIcon } from "./components/Icons";
 import Logo from "./components/Logo";
+import Course from "./components/Course";
+import { courses, cards, logos } from './components/data';
 
 export default class App extends React.Component {
   render() {
@@ -21,14 +23,18 @@ export default class App extends React.Component {
               />
             </TitleBar>
             <ScrollView
-              style={{ flexDirection: "row", padding: 20, paddingLeft: 12, paddingTop: 30 }}
+              style={{
+                flexDirection: "row",
+                padding: 20,
+                paddingLeft: 12,
+                paddingTop: 30
+              }}
               horizontal={true}
+              showsHorizontalScrollIndicator={false}
             >
-              <Logo
-                image={require("./assets/logo-framerx.png")}
-                text="Framer X"
-              />
-              <Logo image={require("./assets/logo-figma.png")} text="Figma" />
+              {logos.map((logo, i) => {
+                return <Logo key={i} image={logo.image} text={logo.text} />;
+              })}
             </ScrollView>
             <Subtitle>Continue Learning</Subtitle>
             <ScrollView
@@ -36,21 +42,34 @@ export default class App extends React.Component {
               style={{ paddingBottom: 30 }}
               showsHorizontalScrollIndicator={false}
             >
-              <Card
-                title="Styled Components"
-                image={require("./assets/background2.jpg")}
-                caption="React Native"
-                logo={require("./assets/logo-react.png")}
-                subtitle="5 of 12 sections"
-              />
-              <Card
-                title="Styled Components"
-                image={require("./assets/background2.jpg")}
-                caption="React Native"
-                logo={require("./assets/logo-react.png")}
-                subtitle="5 of 12 sections"
-              />
+              {cards.map((card, i) => {
+                return (
+                  <Card
+                    key={i}
+                    title={card.title}
+                    image={card.image}
+                    caption={card.caption}
+                    logo={card.logo}
+                    subtitle={card.subtitle}
+                  />
+                );
+              })}
             </ScrollView>
+            <Subtitle>Popular Courses</Subtitle>
+            {courses.map((course, i) => {
+              return (
+                <Course
+                  key={i}
+                  image={course.image}
+                  title={course.title}
+                  subtitle={course.subtitle}
+                  logo={course.logo}
+                  author={course.author}
+                  avatar={course.avatar}
+                  caption={course.caption}
+                />
+              );
+            })}
           </ScrollView>
         </SafeAreaView>
       </Container>
@@ -98,3 +117,5 @@ const TitleBar = styled.View`
   margin-top: 50px;
   padding-left: 80px;
 `;
+
+
