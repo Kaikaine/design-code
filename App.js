@@ -6,18 +6,20 @@ import { Icon } from "expo";
 import { NotificationIcon } from "./components/Icons";
 import Logo from "./components/Logo";
 import Course from "./components/Course";
-import { courses, cards, logos } from './components/data';
+import { courses, cards, logos } from "./components/data";
+import Menu from "./components/Menu";
 
 export default class App extends React.Component {
   render() {
     return (
       <Container>
+        <Menu />
         <SafeAreaView>
           <ScrollView>
             <TitleBar>
               <Avatar source={require("./assets/avatar.jpg")} />
               <Title>Welcome back,</Title>
-              <Name>Meng</Name>
+              <Name>Kairi</Name>
               <NotificationIcon
                 style={{ position: "absolute", right: 20, top: 5 }}
               />
@@ -117,5 +119,3 @@ const TitleBar = styled.View`
   margin-top: 50px;
   padding-left: 80px;
 `;
-
-
