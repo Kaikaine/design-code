@@ -1,7 +1,24 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-export default class Avatar extends Component {
+const mapStateToProps = state => {
+  return {
+    name: state.name
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateName: name =>
+      dispatch({
+        type: "UPDATE_NAME",
+        name: name
+      })
+  };
+};
+
+class Avatar extends Component {
   state = {
     photo: "https://cl.ly/55da82beb939/download/avatar-default.jpg"
   };
@@ -14,6 +31,7 @@ export default class Avatar extends Component {
         this.setState({
           photo: response.photo
         });
+        this.props.updateName(response.name);
       });
   }
 
@@ -21,6 +39,11 @@ export default class Avatar extends Component {
     return <Image source={{ uri: this.state.photo }} />;
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Avatar);
 
 const Image = styled.Image`
   width: 44px;

@@ -7,7 +7,7 @@ import MenuItem from "./MenuItem";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
-  return { action: state.action };
+  return { action: state.action, name: state.name };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -53,7 +53,7 @@ class Menu extends React.Component {
       <AnimatedContainer style={{ top: this.state.top }}>
         <Cover>
           <Image source={require("../assets/background2.jpg")} />
-          <Title>Kairi</Title>
+          <Title>{this.props.name}</Title>
           <Subtitle>Designer at Design+Code</Subtitle>
         </Cover>
         <TouchableOpacity
