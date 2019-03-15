@@ -16,6 +16,7 @@ import Course from "../components/Course";
 import { courses, cards, logos } from "../components/data";
 import Menu from "../components/Menu";
 import { connect } from "react-redux";
+import Avatar from "../components/Avatar";
 
 const mapStateToProps = state => {
   return { action: state.action };
@@ -91,7 +92,7 @@ class HomeScreen extends React.Component {
                   onPress={this.props.openMenu}
                   style={{ position: "absolute", top: 0, left: 10 }}
                 >
-                  <Avatar source={require("../assets/avatar.jpg")} />
+                  <Avatar />
                 </TouchableOpacity>
                 <Title>Welcome back,</Title>
                 <Name>Kairi</Name>
@@ -160,16 +161,16 @@ export default connect(
   mapDispatchToProps
 )(HomeScreen);
 
-const Avatar = styled.Image`
-  width: 44px;
-  height: 44px;
-  background-color: black;
-  border-radius: 22px;
-  margin-left: 20px;
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-`;
+// const Avatar = styled.Image`
+//   width: 44px;
+//   height: 44px;
+//   background-color: black;
+//   border-radius: 22px;
+//   margin-left: 20px;
+//   /* position: absolute; */
+//   top: 0;
+//   left: 0;
+// `;
 
 const RootView = styled.View`
   background-color: black;
