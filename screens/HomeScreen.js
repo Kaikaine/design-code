@@ -13,10 +13,11 @@ import { Icon } from "expo";
 import { NotificationIcon } from "../components/Icons";
 import Logo from "../components/Logo";
 import Course from "../components/Course";
-import { courses, cards, logos } from "../components/data";
+import { courses, cards, logos, CardsQuery } from "../components/data";
 import Menu from "../components/Menu";
 import { connect } from "react-redux";
 import Avatar from "../components/Avatar";
+import { Query } from "react-apollo";
 
 const mapStateToProps = state => {
   return { action: state.action, name: state.name };
@@ -124,26 +125,37 @@ class HomeScreen extends React.Component {
                 style={{ paddingBottom: 30 }}
                 showsHorizontalScrollIndicator={false}
               >
-                {cards.map((card, i) => {
-                  return (
-                    <TouchableOpacity
-                      key={i}
-                      onPress={() => {
-                        this.props.navigation.push("Section", {
-                          section: card
-                        });
-                      }}
-                    >
-                      <Card
-                        title={card.title}
-                        image={card.image}
-                        caption={card.caption}
-                        logo={card.logo}
-                        subtitle={card.subtitle}
-                      />
-                    </TouchableOpacity>
-                  );
-                })}
+                <Query query={CardsQuery}>
+                  {({ loading, error, data }) => {
+                    if (loading) return <Message>Loading...</Message>;
+                    if (error) return <Message>Error...</Message>;
+                    console.log(data.cardsCollection.items);
+                    return (
+                      <CardsContainer>
+                        {data.cardsCollection.items.map((card, i) => {
+                          return (
+                            <TouchableOpacity
+                              key={i}
+                              onPress={() => {
+                                this.props.navigation.push("Section", {
+                                  section: card
+                                });
+                              }}
+                            >
+                              <Card
+                                title={card.title}
+                                image={{ uri: card.image.url }}
+                                caption={card.caption}
+                                logo={{ uri: card.logo.url }}
+                                subtitle={card.subtitle}
+                              />
+                            </TouchableOpacity>
+                          );
+                        })}
+                      </CardsContainer>
+                    );
+                  }}
+                </Query>
               </ScrollView>
               <Subtitle>Popular Courses</Subtitle>
               {courses.map((course, i) => {
@@ -183,6 +195,17 @@ export default connect(
 //   top: 0;
 //   left: 0;
 // `;
+
+const Message = styled.Text`
+  margin: 20px;
+  color: #b8bece;
+  font-size: 15px;
+  font-weight: 500;
+`;
+
+const CardsContainer = styled.View`
+  flex-direction: row;
+`;
 
 const RootView = styled.View`
   background-color: black;

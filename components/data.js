@@ -1,3 +1,38 @@
+import { ApolloClient } from "apollo-boost";
+import gql from "graphql-tag";
+
+export const CardsQuery = gql`
+  {
+    cardsCollection {
+      items {
+        title
+        image {
+          title
+          description
+          contentType
+          fileName
+          size
+          url
+          width
+          height
+        }
+        subtitle
+        caption
+        logo {
+          title
+          description
+          contentType
+          fileName
+          size
+          url
+          width
+          height
+        }
+      }
+    }
+  }
+`;
+
 export const logos = [
   {
     image: require("../assets/logo-framerx.png"),

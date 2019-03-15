@@ -27,7 +27,7 @@ class SectionScreen extends Component {
       <Container>
         <StatusBar hidden />
         <Cover>
-          <Image source={section.image} />
+          <Image source={section.image.url} />
           <Title>{section.title}</Title>
           <Caption>{section.caption}</Caption>
         </Cover>
@@ -51,7 +51,7 @@ class SectionScreen extends Component {
           </CloseView>
         </TouchableOpacity>
         <Wrapper>
-          <Logo source={section.logo} />
+          <Logo source={section.logo.url} />
           <Subtitle>{section.subtitle}</Subtitle>
         </Wrapper>
       </Container>
