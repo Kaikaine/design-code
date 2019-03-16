@@ -6,6 +6,7 @@ export const CardsQuery = gql`
     cardsCollection {
       items {
         title
+        subtitle
         image {
           title
           description
@@ -28,6 +29,7 @@ export const CardsQuery = gql`
           width
           height
         }
+        content
       }
     }
   }
